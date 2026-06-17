@@ -1,0 +1,364 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mood Plant — Coming Soon</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --bg:#07111f;
+    --card:rgba(255,255,255,.08);
+    --border:rgba(255,255,255,.12);
+    --green:#22c55e;
+    --green2:#34d399;
+    --text:#ffffff;
+    --muted:#b7c0cc;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+}
+
+/* Animated background */
+
+.gradient{
+    position:fixed;
+    inset:0;
+    background:
+    radial-gradient(circle at 20% 20%, #16a34a55 0%, transparent 30%),
+    radial-gradient(circle at 80% 30%, #10b98144 0%, transparent 30%),
+    radial-gradient(circle at 50% 80%, #34d39933 0%, transparent 35%);
+    filter:blur(60px);
+    animation:floatBG 12s ease-in-out infinite alternate;
+}
+
+@keyframes floatBG{
+    from{transform:translateY(-30px);}
+    to{transform:translateY(30px);}
+}
+
+.container{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:40px 20px;
+    position:relative;
+    z-index:2;
+}
+
+.card{
+    width:100%;
+    max-width:850px;
+    padding:60px;
+    text-align:center;
+
+    background:var(--card);
+    backdrop-filter:blur(20px);
+
+    border:1px solid var(--border);
+    border-radius:32px;
+
+    box-shadow:
+    0 20px 60px rgba(0,0,0,.3);
+}
+
+.badge{
+    display:inline-flex;
+    padding:10px 18px;
+    border-radius:999px;
+    background:rgba(34,197,94,.15);
+    color:#86efac;
+    font-size:.9rem;
+    margin-bottom:25px;
+}
+
+.logo{
+    font-size:72px;
+    margin-bottom:15px;
+}
+
+h1{
+    font-size:clamp(3rem,7vw,5.5rem);
+    line-height:1;
+    margin-bottom:15px;
+    font-weight:800;
+}
+
+.highlight{
+    color:var(--green2);
+}
+
+.subtitle{
+    max-width:650px;
+    margin:auto;
+    color:var(--muted);
+    font-size:1.15rem;
+    line-height:1.8;
+    margin-bottom:40px;
+}
+
+/* Countdown */
+
+.countdown{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:40px;
+}
+
+.time-box{
+    padding:20px;
+    border-radius:20px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.number{
+    font-size:2rem;
+    font-weight:700;
+}
+
+.label{
+    color:var(--muted);
+    margin-top:8px;
+    font-size:.9rem;
+}
+
+/* Form */
+
+.form{
+    display:flex;
+    gap:12px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.form input{
+    width:350px;
+    max-width:100%;
+    padding:18px 20px;
+    border:none;
+    outline:none;
+    border-radius:14px;
+    font-size:1rem;
+}
+
+.form button{
+    padding:18px 28px;
+    border:none;
+    border-radius:14px;
+    background:linear-gradient(135deg,var(--green),var(--green2));
+    color:white;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.form button:hover{
+    transform:translateY(-2px);
+}
+
+.success{
+    margin-top:18px;
+    color:#86efac;
+    display:none;
+}
+
+.footer{
+    margin-top:35px;
+    color:var(--muted);
+    font-size:.9rem;
+}
+
+@media(max-width:768px){
+
+    .card{
+        padding:40px 24px;
+    }
+
+    .countdown{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .form{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .form button,
+    .form input{
+        width:100%;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="gradient"></div>
+
+<div class="container">
+
+    <div class="card">
+
+        <div class="badge">
+            🚀 Launching Soon
+        </div>
+
+        <div class="logo"></div>
+
+        <h1>
+            Mood <span class="highlight">Plant</span>
+        </h1>
+
+        <p class="subtitle">
+            Grow your mental wellness like a thriving plant.
+            Track your moods, build healthy habits, and nurture
+            your emotional well-being with a beautifully designed experience.
+        </p>
+
+        <div class="countdown">
+            <div class="time-box">
+                <div class="number" id="days">00</div>
+                <div class="label">Days</div>
+            </div>
+
+            <div class="time-box">
+                <div class="number" id="hours">00</div>
+                <div class="label">Hours</div>
+            </div>
+
+            <div class="time-box">
+                <div class="number" id="minutes">00</div>
+                <div class="label">Minutes</div>
+            </div>
+
+            <div class="time-box">
+                <div class="number" id="seconds">00</div>
+                <div class="label">Seconds</div>
+            </div>
+        </div>
+
+        <form class="form" id="notifyForm">
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email address"
+                required
+            />
+
+            <button type="submit">
+                Notify Me
+            </button>
+        </form>
+
+        <div class="success" id="successMessage">
+            ✅ Thanks! We'll notify you when Mood Plant launches.
+        </div>
+
+        <div class="footer">
+            © 2026 Mood Plant • All Right Reserve
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+/* Launch Date */
+const launchDate = new Date("2026-07-15T00:00:00").getTime();
+
+function updateCountdown(){
+
+    const now = new Date().getTime();
+    const distance = launchDate - now;
+
+    const days = Math.floor(distance/(1000*60*60*24));
+    const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+    const minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+    const seconds = Math.floor((distance%(1000*60))/1000);
+
+    document.getElementById("days").innerText = days;
+    document.getElementById("hours").innerText = hours;
+    document.getElementById("minutes").innerText = minutes;
+    document.getElementById("seconds").innerText = seconds;
+}
+
+setInterval(updateCountdown,1000);
+updateCountdown();
+
+/* Email Capture - Google Sheets Integration */
+
+// 👇 Yahan apna Apps Script Web App URL paste karein
+const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbzUevGGMxGXWCz09OE1mkwE5uW0vxRbyQlmwgRSySCbNNF6vgvkpHKzdPSSfIx0ePrH/exec";
+
+document
+.getElementById("notifyForm")
+.addEventListener("submit", async function(e){
+
+    e.preventDefault();
+
+    const email = document.getElementById("email").value;
+    const submitBtn = document.querySelector(".form button");
+    const originalText = submitBtn.innerText;
+    const successMsg = document.getElementById("successMessage");
+
+    submitBtn.innerText = "Submitting...";
+    submitBtn.disabled = true;
+    successMsg.style.display = "none";
+
+    try {
+        const response = await fetch(GOOGLE_SHEET_URL, {
+            method: "POST",
+            headers: {
+                // text/plain avoids CORS preflight with Apps Script
+                "Content-Type": "text/plain;charset=utf-8",
+            },
+            body: JSON.stringify({ email: email }),
+        });
+
+        const result = await response.json();
+
+        if (result.status === "success") {
+            successMsg.innerText = "✅ Thanks! We'll notify you when Mood Plant launches.";
+            successMsg.style.color = "#86efac";
+            successMsg.style.display = "block";
+            document.getElementById("email").value = "";
+
+        } else if (result.status === "duplicate") {
+            successMsg.innerText = "⚠️ This email is already registered.";
+            successMsg.style.color = "#fbbf24";
+            successMsg.style.display = "block";
+
+        } else {
+            alert("Kuch galat hua, dobara try karein.");
+        }
+
+    } catch (error) {
+        console.error("Error submitting email:", error);
+        alert("Kuch galat hua, dobara try karein.");
+    } finally {
+        submitBtn.innerText = originalText;
+        submitBtn.disabled = false;
+    }
+});
+</script>
+
+</body>
+</html>
+
